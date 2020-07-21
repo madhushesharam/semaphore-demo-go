@@ -1,0 +1,24 @@
+version: v1.0
+name: Pipeline 2
+blocks:
+  - name: AFT
+    task:
+      jobs:
+        - name: Sanity Test
+          commands:
+            - echo "job 1"
+  - name: AFT's
+    task:
+      jobs:
+        - name: Functional Test
+          commands:
+            - echo "Perf"
+  - name: Performance Tests
+    task:
+      jobs:
+        - name: Tests
+          commands: []
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804

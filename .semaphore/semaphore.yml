@@ -5,19 +5,30 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Build
+  - name: Build Project
     task:
       jobs:
-        - name: Initial Build
+        - name: Build and Unit Tests
           commands:
-            - checkout
-  - name: 'Block #2'
+            - echo "job 1"
+  - name: Static Code Analysis
     task:
       jobs:
-        - name: 'Job #1'
+        - name: DeteKt
+          commands:
+            - echo "job 1"
+        - name: SonarQube
+          commands:
+            - echo "job 1"
+        - name: 'Fortify '
           commands: []
-  - name: 'Block #3'
+  - name: Upload Artifacts
     task:
       jobs:
-        - name: 'Job #1'
+        - name: artifacts to s3/ECR etc
           commands: []
+promotions:
+  - name: Dev
+    pipeline_file: pipeline_2.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
